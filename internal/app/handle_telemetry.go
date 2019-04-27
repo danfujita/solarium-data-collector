@@ -3,7 +3,7 @@ package app
 import (
 	"encoding/json"
 	"github.com/influxdata/influxdb1-client/v2"
-	"solarium-golang/internal/configs"
+	"solarium-golang/internal/config_reader"
 	"time"
 )
 
@@ -19,7 +19,7 @@ type TelementryData struct {
 }
 
 func UploadTelemetryData(telementryData map[string]interface{}, userId string, deviceId string) error {
-	myConfig := configs.Config()
+	myConfig := config_reader.Config()
 	client.NewHTTPClient(client.HTTPConfig{ //TODO Handle Error
 		Addr: myConfig.InfluxAddress,
 	})

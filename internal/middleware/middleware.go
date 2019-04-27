@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
-	"solarium-golang/internal/configs"
+	"solarium-golang/internal/config_reader"
 	"strings"
 )
 
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		secret := configs.Config().Token
+		secret := config_reader.Config().Token
 		authValue := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
 
 		if len(authValue) != 2 {
