@@ -2,14 +2,17 @@ package main
 
 import (
 	"fmt"
+	"github.com/go-chi/chi"
 	"net/http"
 	"solarium-golang/internal/app"
 	"solarium-golang/internal/middleware"
 )
 
 func main() {
-	http.Handle("/api/telemetry", middleware.Middleware(http.HandlerFunc(app.Telemetry)))
-	http.Handle("/api/telemetry_file", middleware.Middleware(http.HandlerFunc(app.TelemetryFile)))
+	r := chi.NewRouter()
+	r.Use(middleware.Middleware)
+	r.Post("/api/telemetry", app.Telemetry)
+	r.Post("/api/telemetry_file", app.TelemetryFile)
 	fmt.Print("Service starting at port 8080")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", r)
 }
