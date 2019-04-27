@@ -9,8 +9,10 @@ import (
 type Configuration struct {
 	Token string
 	InfluxAddress string
-	Username string
-	Password string
+	InfluxUserName string
+	InfluxPassword string
+	InfluxDatabase string
+	InfluxTableName string
 }
 
 func Config() Configuration{

@@ -37,7 +37,7 @@ func Middleware(next http.Handler) http.Handler {
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 
 			deviceInfo := map[string]string{"device_id": claims["device_id"].(string),
-				                            "user_id": claims["user_id"].(string)}
+				"user_id": claims["user_id"].(string)}
 
 			ctx := context.WithValue(r.Context(), "deviceInfo", deviceInfo)
 			next.ServeHTTP(w, r.WithContext(ctx))

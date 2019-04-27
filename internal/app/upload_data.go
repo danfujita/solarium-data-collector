@@ -17,11 +17,22 @@ func Telemetry(w http.ResponseWriter, r *http.Request) {
 		_ = json.NewEncoder(w).Encode(body)
 		return
 	}
-	TelemetryData(deviceInfo, data)
-
+	err = TelemetryData(deviceInfo, data)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		body := map[string]string{"error": err.Error()}
+		_ = json.NewEncoder(w).Encode(body)
+		return
+	} else {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		body := map[string]bool{"success": true}
+		_ = json.NewEncoder(w).Encode(body)
+		return
+	}
 }
 
-func TelemetryFile(w http.ResponseWriter, r *http.Request) {
-
+func Payload(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
 }
