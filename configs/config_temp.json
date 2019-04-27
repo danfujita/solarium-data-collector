@@ -3,5 +3,4 @@
   "InfluxAddress": "http://localhost:8086",
   "Username":"username",
   "Password":"password"
-
 }
