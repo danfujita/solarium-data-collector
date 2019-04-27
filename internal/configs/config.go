@@ -8,6 +8,9 @@ import (
 
 type Configuration struct {
 	Token string
+	InfluxAddress string
+	Username string
+	Password string
 }
 
 func Config() Configuration{
@@ -21,3 +24,4 @@ func Config() Configuration{
 	}
 	return configuration
 }
+

@@ -12,12 +12,16 @@ import (
 
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		secret := configs.Config().Token
 
+		secret := configs.Config().Token
 		authValue := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
 
 		if len(authValue) != 2 {
-			http.Error(w, "Authorization Error", 401)
+
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusUnauthorized)
+			body := map[string]string{"error": "Authorization Error"}
+			_ = json.NewEncoder(w).Encode(body)
 			return
 		}
 
@@ -30,17 +34,18 @@ func Middleware(next http.Handler) http.Handler {
 			return []byte(secret), nil
 		})
 
-		if _, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 
-			ctx := context.WithValue(r.Context(), "token", token)
+			deviceInfo := map[string]string{"device_id": claims["device_id"].(string),
+				                            "user_id": claims["user_id"].(string)}
+
+			ctx := context.WithValue(r.Context(), "deviceInfo", deviceInfo)
 			next.ServeHTTP(w, r.WithContext(ctx))
-
 		} else {
 
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusForbidden)
 			body := map[string]string{"error": err.Error()}
-
 			_ = json.NewEncoder(w).Encode(body)
 			return
 		}
