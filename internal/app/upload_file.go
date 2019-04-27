@@ -8,6 +8,6 @@ import (
 func Telemetry(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
 }
-func Telemetry_file(w http.ResponseWriter, r *http.Request) {
+func TelemetryFile(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
 }
