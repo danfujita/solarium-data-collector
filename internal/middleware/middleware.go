@@ -1,6 +1,7 @@
-package middlware
+package middleware
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
@@ -29,8 +30,10 @@ func Middleware(next http.Handler) http.Handler {
 		if _, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			next.ServeHTTP(w, r)
 		} else {
+			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusForbidden)
-			w.Write([]byte(err.Error()))
+			body := map[string]string{"error": err.Error()}
+			json.NewEncoder(w).Encode(body)
 			return
 		}
 
