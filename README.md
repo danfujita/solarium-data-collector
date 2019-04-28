@@ -1,4 +1,4 @@
-[Currently under development]
+[Currently under development] This is my first project in Go. 
 
 Solarium Data Collector
 ======
@@ -11,4 +11,17 @@ The goal of this application is to collect data from Solarium devices, and to up
 The application works with a separate customer facing web portal service, which is currently under development. 
 
 The Python hardware code for Solarium can be found at https://github.com/apsistech/Solarium
+
+### Layout
+This project follows Standard Go Project Layout from https://github.com/golang-standards/project-layout
+
+### Building from source
+
+You can also clone the repository yourself and build using make:
+
+    $ git clone https://github.com/danfujita/solarium-data-collector.git
+    $ make
+    $ ./main
+
+### Docker images
 
