@@ -7,15 +7,15 @@ import (
 )
 
 type Configuration struct {
-	Token string
-	InfluxAddress string
-	InfluxUserName string
-	InfluxPassword string
-	InfluxDatabase string
+	Token           string
+	InfluxAddress   string
+	InfluxUserName  string
+	InfluxPassword  string
+	InfluxDatabase  string
 	InfluxTableName string
 }
 
-func Config() Configuration{
+func Config() Configuration {
 	file, _ := os.Open("config/config.json")
 	defer file.Close()
 	decoder := json.NewDecoder(file)
@@ -26,4 +26,3 @@ func Config() Configuration{
 	}
 	return configuration
 }
-
