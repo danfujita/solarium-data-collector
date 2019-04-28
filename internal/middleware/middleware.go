@@ -31,8 +31,8 @@ func Middleware(next http.Handler) http.Handler {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 			}
-
 			return []byte(secret), nil
+
 		})
 
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
@@ -48,7 +48,6 @@ func Middleware(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusForbidden)
 			body := map[string]string{"error": err.Error()}
 			_ = json.NewEncoder(w).Encode(body)
-
 			return
 		}
 	})
