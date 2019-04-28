@@ -10,6 +10,7 @@ import (
 func Telemetry(w http.ResponseWriter, r *http.Request) {
 	deviceInfo, _ := r.Context().Value("deviceInfo").(map[string]string)
 	data, err := ioutil.ReadAll(r.Body)
+
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
@@ -17,7 +18,9 @@ func Telemetry(w http.ResponseWriter, r *http.Request) {
 		_ = json.NewEncoder(w).Encode(body)
 		return
 	}
+
 	err = TelemetryData(deviceInfo, data)
+
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)

@@ -23,6 +23,7 @@ func Middleware(next http.Handler) http.Handler {
 			body := map[string]string{"error": "Authorization Error"}
 			_ = json.NewEncoder(w).Encode(body)
 			return
+
 		}
 
 		token, err := jwt.Parse(authValue[1], func(token *jwt.Token) (interface{}, error) {
@@ -38,15 +39,16 @@ func Middleware(next http.Handler) http.Handler {
 
 			deviceInfo := map[string]string{"device_id": claims["device_id"].(string),
 				"user_id": claims["user_id"].(string)}
-
 			ctx := context.WithValue(r.Context(), "deviceInfo", deviceInfo)
 			next.ServeHTTP(w, r.WithContext(ctx))
+
 		} else {
 
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusForbidden)
 			body := map[string]string{"error": err.Error()}
 			_ = json.NewEncoder(w).Encode(body)
+
 			return
 		}
 	})
