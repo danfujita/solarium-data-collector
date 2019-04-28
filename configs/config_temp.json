@@ -1,6 +1,9 @@
 {
   "Token": "token",
   "InfluxAddress": "http://localhost:8086",
-  "Username":"username",
-  "Password":"password"
+  "InfluxUserName" : "",
+  "InfluxPassword"  : "",
+  "InfluxDatabase"  : "",
+  "InfluxTableName" : "",
+  "S3BucketName"    : ""
 }
