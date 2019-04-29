@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"net/http"
 	"os/exec"
-	"solarium-golang/internal/config_reader"
+	"solarium-data-collector/internal/config_reader"
 )
 
 func AddFileToS3(file []byte, deviceId string) error {

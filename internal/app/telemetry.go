@@ -3,7 +3,7 @@ package app
 import (
 	"encoding/json"
 	"github.com/influxdata/influxdb1-client/v2"
-	"solarium-golang/internal/config_reader"
+	"solarium-data-collector/internal/config_reader"
 	"time"
 )
 

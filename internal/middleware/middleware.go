@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
-	"solarium-golang/internal/config_reader"
+	"solarium-data-collector/internal/config_reader"
 	"strings"
 )
 

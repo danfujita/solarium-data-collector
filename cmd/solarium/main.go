@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/go-chi/chi"
 	"net/http"
-	"solarium-golang/internal/app"
-	"solarium-golang/internal/middleware"
+	"solarium-data-collector/internal/app"
+	"solarium-data-collector/internal/middleware"
 )
 
 func main() {
