@@ -13,6 +13,7 @@ type Configuration struct {
 	InfluxPassword  string
 	InfluxDatabase  string
 	InfluxTableName string
+	S3BucketName string
 }
 
 func Config() Configuration {
