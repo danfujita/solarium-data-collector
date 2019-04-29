@@ -1,6 +1,7 @@
 [Currently under development] This is my first project in Go. 
 
 [![Build Status](https://travis-ci.org/danfujita/solarium-data-collector.svg?branch=master)](https://travis-ci.org/danfujita/solarium-data-collector)
+
 Solarium Data Collector
 ======
 ![Alt text](https://github.com/danfujita/solarium-golang/blob/master/web/public/logo.png)
