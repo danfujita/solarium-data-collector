@@ -17,7 +17,7 @@ This project follows Standard Go Project Layout from https://github.com/golang-s
 
 ### Building from source
 
-You can also clone the repository yourself and build using make:
+You can also clone the repository and build using make:
 
     $ git clone https://github.com/danfujita/solarium-data-collector.git
     $ make
@@ -25,3 +25,7 @@ You can also clone the repository yourself and build using make:
 
 ### Docker images
 
+Docker images are available on Docker Hub.
+
+    $ docker pull danfujita55/solarium-data-collector
+    $ docker run -d -p 8080:8080 danfujita55/solarium-data-collector
