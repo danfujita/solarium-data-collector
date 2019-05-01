@@ -4,7 +4,7 @@
 
 Solarium Data Collector
 ======
-![Alt text](https://github.com/danfujita/solarium-golang/blob/master/web/public/logo.png)
+![Alt text](https://github.com/danfujita/danfujita.github.io/blob/master/images/apsis_logo.png)
 
 
 Solarium Data Collector is a Golang version of data collection backend microservice, which is currently under development for Apsis Science & Technology LLC. 
