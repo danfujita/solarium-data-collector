@@ -14,10 +14,12 @@ type Configuration struct {
 	InfluxDatabase  string
 	InfluxTableName string
 	S3BucketName string
+	PortNumber int
+
 }
 
 func Config() Configuration {
-	file, _ := os.Open("config/config.json")
+	file, _ := os.Open("configs/config.json")
 	defer file.Close()
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
