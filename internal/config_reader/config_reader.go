@@ -2,13 +2,13 @@ package config_reader
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 type Configuration struct {
-	Token           string
+	TokenSecret     string
 	InfluxAddress   string
 	InfluxUserName  string
 	InfluxPassword  string
@@ -18,15 +18,15 @@ type Configuration struct {
 	PortNumber      int
 }
 
-var token = flag.String("token", "", "JWT token secret")
-var influxAddress = flag.String("influx-addr", "", "Address of influx db")
-var influxUserName = flag.String("influx-uname", "", "User name of influx db")
-var influxPassword = flag.String("influx-pw", "", "Password of influx db")
-var influxDatabase = flag.String("influx-db", "", "Database of influx db")
-var influxTableName = flag.String("influx-tn", "", "Table name of influx db")
-var s3BucketName = flag.String("s3-bucket", "", "S3 bucket Name")
-var portNumber = flag.Int("port-num", 8080, "Port Number")
-var configFile = flag.String("config-file", "", "File name")
+var tokenSecret = os.Getenv("JWT_TOKEN")
+var influxAddress = os.Getenv("INFLUX_ADDR")
+var influxUserName = os.Getenv("INFLUX_USERNAME")
+var influxPassword = os.Getenv("INFLUX_PW")
+var influxDatabase = os.Getenv("INFLUX_DB")
+var influxTableName = os.Getenv("INFLUX_TN")
+var s3BucketName = os.Getenv("S3_BUCKET_NAME")
+var portNumber = os.Getenv("PORT_NUMBER")
+var configFile = os.Getenv("CONFIG_FILE")
 
 func configFromfile(fileName string) Configuration {
 	file, _ := os.Open("configs/" + fileName)
@@ -42,22 +42,25 @@ func configFromfile(fileName string) Configuration {
 
 func configFromArgs() Configuration {
 	var configuration Configuration
-	configuration.Token = *token
-	configuration.InfluxAddress = *influxAddress
-	configuration.InfluxUserName = *influxUserName
-	configuration.InfluxPassword = *influxPassword
-	configuration.InfluxDatabase = *influxDatabase
-	configuration.InfluxTableName = *influxTableName
-	configuration.S3BucketName = *s3BucketName
-	configuration.PortNumber = *portNumber
+	configuration.TokenSecret = tokenSecret
+	configuration.InfluxAddress = influxAddress
+	configuration.InfluxUserName = influxUserName
+	configuration.InfluxPassword = influxPassword
+	configuration.InfluxDatabase = influxDatabase
+	configuration.InfluxTableName = influxTableName
+	configuration.S3BucketName = s3BucketName
+	strPortNumber, err := strconv.Atoi(portNumber)
+	if err != nil {
+		strPortNumber = 8080
+	} else {
+		configuration.PortNumber = strPortNumber
+	}
 	return configuration
 }
 
 func Config() Configuration {
-	flag.Parse()
-	if *configFile != "" {
-		fmt.Printf(*configFile)
-		return configFromfile(*configFile)
+	if configFile != "" {
+		return configFromfile(configFile)
 	} else {
 		return configFromArgs()
 	}
