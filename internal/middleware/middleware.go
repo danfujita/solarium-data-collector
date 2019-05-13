@@ -13,7 +13,7 @@ import (
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		secret := config_reader.Config().Token
+		secret := config_reader.Config().TokenSecret
 		authValue := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
 
 		if len(authValue) != 2 {

@@ -1,5 +1,5 @@
 {
-  "Token": "token",
+  "TokenSecret": "token",
   "InfluxAddress": "http://localhost:8086",
   "InfluxUserName" : "",
   "InfluxPassword"  : "",
